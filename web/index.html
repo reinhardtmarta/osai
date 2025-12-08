@@ -1,102 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html><head>
 <meta charset="utf-8">
-<title>connectOS • NexusPhi</title>
+<title>connectOS</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="manifest" href="/.connectos/boot/manifest.json">
 <style>
-  body,html{margin:0;height:100%;background:#000;color:#0f0;font-family:system-ui;overflow:hidden;position:relative}
-  #boot{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:1.6em;text-align:center;z-index:9999}
-  .phi{color:#ff1493}
-  #desktop{background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23000"/><path d="M50 10 L90 90 L10 90 Z" fill="%23001100"/></svg>') repeat}
-  #icons{position:absolute;top:20px;left:20px;display:grid;grid-template-columns:repeat(auto-fill,80px);gap:20px}
-  .icon{text-align:center;color:#0f0;cursor:pointer;padding:10px;border-radius:8px;transition:0.3s}
-  .icon:hover{background:#003300}
-  #trash{position:fixed;bottom:80px;right:30px;width:64px;height:80px;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="%230f0" d="M12 4h8v2h-8zm-2 4v20h12V8zm-2 0h-4v22h20V8h-4z"/></svg>') no-repeat center}
-  #taskbar{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:2px solid #0f0;padding:10px;display:flex;gap:15px;justify-content:center;align-items:center}
-  .app{background:none;border:none;color:#0f0;font-size:28px;cursor:pointer}
-  iframe{display:none;width:100%;height:calc(100% - 60px);border:none;background:#000}
+  :root{--phi: #b8860b;--neon: #00ff41;--bg: #000}
+  body,html{margin:0;height:100%;background:var(--bg);color:var(--neon);font-family:'Inter',sans-serif;overflow:hidden;position:relative}
+  
+  .wallpaper{
+    position:fixed;inset:0;opacity:0.07;
+    background:radial-gradient(circle at center, var(--phi) 0%, transparent 70%);
+    animation: breathe 60s infinite linear;
+  }
+  
+  .desktop{
+    height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;
+    position:relative;z-index:2
+  }
+  
+  .icon{
+    width:120px;height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    color:var(--neon);font-size:14px;cursor:pointer;
+    transition:.3s; border-radius:20px;
+  }
+  .icon:hover{background:#002200;transform:scale(1.15)}
+  .icon div{font-size:80px;margin-bottom:8px;filter:drop-shadow(0 0 10px var(--phi))}
+  
+  .nexus{
+    width:180px;height:180px;border:3px solid var(--phi);border-radius:50%;
+    position:fixed;bottom:40px;right:40px;z-index:99;
+    background:var(--bg);display:flex;align-items:center;justify-content:center;
+    animation:pulse 8s infinite;
+    cursor:pointer;
+  }
+  .nexus:hover{border-color:var(--neon)}
+  
+  @keyframes breathe{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+  @keyframes pulse{0%,100%{box-shadow:0 0 20px var(--phi)}50%{box-shadow:0 0 40px var(--neon)}}
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div id="boot">
-  <h1>connect<span class="phi">OS</span></h1>
-  <p>NexusPhi is taking control...</p>
-  <p id="status">Creating your personal universe...</p>
+<div class="wallpaper"></div>
+
+<div class="desktop">
+  <div class="icon" onclick="openApp('nexusphi/chat.html')">
+    <div>Infinity</div>
+    <div>NexusPhi</div>
+  </div>
+  <div class="icon" onclick="openApp('apps/files.html')">
+    <div>Folder</div>
+    <div>Arquivos</div>
+  </div>
+  <div class="icon" onclick="openApp('apps/browser.html')">
+    <div>Web</div>
+    <div>Navegador</div>
+  </div>
+  <div class="icon" onclick="openApp('system/universal-exec.js')">
+    <div>all.exe</div>
+    <div>Executar tudo</div>
+  </div>
 </div>
 
-<div id="desktop">
-  <div id="icons">
-    <div class="icon" onclick="openApp('nexusphi/chat.html')"><div>∞</div><small>NexusPhi</small></div>
-    <div class="icon" onclick="openApp('apps/files.html')"><div>Folder</div><small>Files</small></div>
-    <div class="icon" onclick="openApp('apps/python.html')"><div>Py</div><small>Python</small></div>
-    <div class="icon" onclick="openApp('apps/godot.html')"><div>Gd</div><small>Godot</small></div>
-  </div>
-  <div id="trash" title="Trash (NexusPhi cleans automatically)"></div>
-  <div id="taskbar">
-    <button class="app" onclick="openApp('nexusphi/chat.html')">NexusPhi</button>
-    <button class="app" onclick="openApp('apps/files.html')">Files</button>
-    <button class="app" onclick="clearCache()">Clean</button>
-  </div>
-  <iframe id="window"></iframe>
+<div class="nexus" onclick="openApp('nexusphi/chat.html')">
+  <div style="font-size:80px">Eye</div>
 </div>
 
 <script>
-const PHI = 1.618
-let step = 0
-const status = document.getElementById('status')
-const bootSteps = [
-  "Creating secure storage...",
-  "Mounting Φ-filesystem...",
-  "NexusPhi scanning memory & battery...",
-  "Cleaning old caches automatically...",
-  "Building your desktop...",
-  "Welcome. Everything is ready."
-]
-
-function typeWriter(text, i = 0) {
-  if (i < text.length) {
-    status.innerHTML = text.substring(0, i+1) + '<span class="phi">█</span>'
-    setTimeout(() => typeWriter(text, i+1), 70)
-  } else {
-    step++
-    if (step < bootSteps.length) setTimeout(() => typeWriter(bootSteps[step]), 900)
-    else setTimeout(() => {
-      document.getElementById('boot').style.opacity = '0'
-      setTimeout(() => {
-        document.getElementById('boot').remove()
-        document.getElementById('desktop').style.display = 'block'
-        nexusSpeak("Oi! Acabei de limpar 127 MB de cache pra você. Tudo leve agora.")
-      }, 600)
-    }, 1200)
-  }
+function openApp(url){
+  const win = document.createElement('iframe')
+  win.src = url
+  win.style = 'position:fixed;inset:40px;border:none;border-radius:20px;box-shadow:0 0 60px var(--phi);z-index:999'
+  document.body.appendChild(win)
 }
-
-// Abre apps
-function openApp(url) {
-  document.getElementById('window').style.display = 'block'
-  document.getElementById('window').src = url
-}
-
-// NexusPhi fala no chat (mesmo que ainda não exista)
-function nexusSpeak(text) {
-  if (document.getElementById('window').contentWindow.postMessage) {
-    document.getElementById('window').contentWindow.postMessage({type:'nexus', text}, '*')
-  }
-}
-
-// Limpeza automática (NexusPhi faz sozinha a cada 6h)
-function clearCache() {
-  caches.keys().then(names => names.forEach(name => caches.delete(name)))
-  indexedDB.databases().then(dbs => dbs.forEach(db => indexedDB.deleteDatabase(db.name)))
-  nexusSpeak("Cache e cookies apagados. +340 MB livres. Você é lindo(a).")
-  alert("NexusPhi cleaned everything!")
-}
-
-// Inicia o boot
-typeWriter(bootSteps[0])
 </script>
 </body>
 </html>
