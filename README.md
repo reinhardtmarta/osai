@@ -46,7 +46,8 @@ Want to hack without a phone? Open in Colab: �
 → AI Official: **NexusPhi**
 → Run on all device
 
-[![NexusPhi coming soon](https://img.shields.io/badge/NexusPhi-nascendo-ff69b4?style=for-the-badge&logo=ghost)](nexusphi/)
+[![NexusPhi coming soon](https://img.shields.io/badge/NexusPhi-π-ff69b4?style=for-the-badge&logo=ghost)](nexusphi/)
+
 Contribute
 Fork, hack, PR. Focus: more platforms (Windows Subsystem? WebAssembly?), quantum backends.
 Issues: Report bugs or "wish this ran on my Nokia 3310".
