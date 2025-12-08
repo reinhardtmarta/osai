@@ -18,6 +18,10 @@
 1. **Install Base**:
    - Android: Download [Termux](https://f-droid.org/packages/com.termux/) (free, no Google Play needed).
    - iOS: Get [iSH](https://ish.app/) from TestFlight.
+
+## Instant Live Version (opens on ANY device)
+
+[![connectOS live • click and run](https://img.shields.io/badge/connectOS-live-00ff00?style=for-the-badge&logo=weba)](https://reinhardtmarta.github.io/connectOS)
    
 2. **One-Click Boot**:
    ```bash
