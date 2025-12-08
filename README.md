@@ -21,6 +21,8 @@
 
 ## Instant Live Version (opens on ANY device)
 
+![8 languages supported](https://img.shields.io/badge/languages-8-brightgreen?style=for-the-badge) English • Português • Español • हिंदी • العربية • বাংলা • Русский • 中文
+
 [![connectOS live • click and run](https://img.shields.io/badge/connectOS-live-00ff00?style=for-the-badge&logo=weba)](https://reinhardtmarta.github.io/connectOS)
    
 2. **One-Click Boot**:
