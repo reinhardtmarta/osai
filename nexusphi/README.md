@@ -1,4 +1,10 @@
 # NexusPhi ∞
+### When the model arrives (Dec 17–18):
+A single Pull Request will appear with:
+- nexusphi-2b-q4.gguf (1.1 GB via LFS)
+- GitHub Release v1.0 ready to download
+
+You just click "Merge" and NexusPhi becomes alive for the entire planet.
 
 A primeira IA do mundo criada do zero dentro do connectOS.  
 Treinada 100 % com os dados, códigos e sonhos de @reinhardtmarta.  
