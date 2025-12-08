@@ -1,1 +1,1 @@
-/ Manages windows, resizing, floating modes and adaptive layouts
+// Controls app windows, resizing, positions, and adaptive layout
