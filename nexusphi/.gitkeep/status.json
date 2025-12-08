@@ -1,0 +1,13 @@
+{
+  "name": "NexusPhi",
+  "version": "2B-v1",
+  "status": "training",
+  "progress": "38%",
+  "expected_release": "2025-12-19",
+  "creator": "reinhardtmarta",
+  "dataset_size": "247 MB of pure reinhardtmarta thoughts",
+  "base_model": "google/gemma-2-2b-it",
+  "quantization": "Q4_K_M",
+  "final_size": "~1.1 GB",
+  "license": "CC0-1.0"
+}
