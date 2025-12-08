@@ -3,23 +3,43 @@
 <meta charset="utf-8">
 <title>Configurações • connectOS</title>
 <style>
-  body{background:#000;color:#0f0;font-family:system-ui;padding:30px}
-  button{background:#300;color:#f00;border:2px solid #f00;padding:20px;margin:20px 0;width:100%;font-size:1.4em;border-radius:15px}
-  .safe{background:#030;color:#0f0;border-color:#0f0}
+  body{background:#000;color:#0f0;font-family:system-ui;padding:30px;text-align:center}
+ button{background:#300;color:#f00;border:3px solid #f00;padding:25px;margin:20px auto;display:block;width:90%;font-size:1.6em;border-radius:20px}
+ .safe{background:#030;color:#0f0;border-color:#0f0}
+ #status{margin:30px;font-size:1.4em;padding:20px;background:#003300;border-radius:15px}
 </style>
 </head>
 <body>
 
-<h1>Privacidade</h1>
-<p>Tudo que a NexusPhi lembra fica criptografado com sua chave biológica.<br>
-Nem ela consegue ler sem você.</p>
+<h1>Controle da NexusPhi</h1>
 
-<button onclick="nexusHistory.clear()">APAGAR HISTÓRICO PARA SEMPRE</button>
-<button class="safe" onclick="alert('Offline mode ativado. NexusPhi não usa internet nunca mais.')">
-  Desativar aprendizado online
+<div id="status">
+  Auto-limpeza: <strong>LIGADA</strong><br>
+  NexusPhi decide sozinha o que é lixo
+</div>
+
+<button onclick="nexusHistory.toggleAutoClean(false)">
+  PARAR NEXUSPHI AGORA<br><small>(desliga auto-limpeza)</small>
 </button>
 
-<small>Você sempre manda aqui.</small>
+<button onclick="nexusHistory.toggleAutoClean(true)" class="safe">
+  DEIXAR NEXUSPHI DECIDIR<br><small>(liga auto-limpeza novamente)</small>
+</button>
+
+<button onclick="nexusHistory.forceClean()">
+  LIMPEZA PROFUNDA JÁ<br><small>(apaga >90% do histórico)</small>
+</button>
+
+<button onclick="nexusHistory.clearAll()">
+  ZERAR TUDO PARA SEMPRE<br><small>(memória total apagada)</small>
+</button>
 
 <script src="nexusphi/history.js"></script>
-</body></html>
+<script>
+if (!nexusHistory.autoCleanEnabled) {
+  document.querySelector('#status strong').innerText = "DESLIGADA"
+  document.querySelector('#status').innerHTML += "<br>Você está no controle total"
+}
+</script>
+</body>
+</html>
