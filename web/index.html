@@ -2,49 +2,84 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>connectOS • NexusPhi</title>
+<title>connectOS • NexusPhi booting...</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="manifest" href="/.connectos/boot/manifest.json">
 <style>
-  body,html{margin:0;height:100%;background:#000;color:#0f0;font-family:system-ui;overflow:hidden}
-  #boot{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;font-size:4em;z-index:9999}
+  body,html{margin:0;height:100%;background:#000;color:#0f0;font-family:system-ui;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  #boot{font-size:1.4em;text-align:center;line-height:2}
+  .phi{color:#ff1493}
   #desktop{display:none;flex-direction:column;height:100%}
-  #taskbar{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:2px solid #0f0;padding:8px;display:flex;gap:12px;justify-content:center}
-  .app-btn{background:none;border:none;color:#0f0;font-size:24px;cursor:pointer}
-  iframe{border:none;width:100%;flex:1;background:#000}
+  #taskbar{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:2px solid #0f0;padding:10px;display:flex;gap:20px;justify-content:center}
+  .app{background:none;border:none;color:#0f0;font-size:28px;cursor:pointer}
+  iframe{flex:1;width:100%;border:none;background:#000}
 </style>
 </head>
 <body>
 
-<div id="boot">connectOS<br><small>Φ booting...</small></div>
+<div id="boot">
+  <h1>connect<span class="phi">OS</span></h1>
+  <p>NexusPhi is waking up...<br><small>analyzing your device · optimizing Φ-experience</small></p>
+  <p id="status">Detecting hardware...</p>
+</div>
+
 <div id="desktop">
-  <iframe id="window" src="about:blank"></iframe>
+  <iframe id="main"></iframe>
   <div id="taskbar">
-    <button class="app-btn" onclick="openApp('nexusphi/chat.html')">Φ</button>
-    <button class="app-btn" onclick="openApp('apps/python.html')">Py</button>
-    <button class="app-btn" onclick="openApp('apps/godot.html')">Gd</button>
-    <button class="app-btn" onclick="openApp('apps/qiskit.html')">Qb</button>
+    <button class="app" onclick="open('nexusphi/chat.html')">NexusPhi</button>
+    <button class="app" onclick="open('apps/python.html')">Python</button>
+    <button class="app" onclick="open('apps/godot.html')">Godot</button>
+    <button class="app" onclick="open('apps/qiskit.html')">Qiskit</button>
   </div>
 </div>
 
 <script>
-const PHI = 1.618
-let t = 0
-function boot() {
-  t += 0.08
-  const s = Math.abs(Math.sin(t)) * 0.15 + 0.925
-  document.body.style.transform = `scale(${s})`
-  if (t < Math.PI*3) requestAnimationFrame(boot)
-  else {
-    document.getElementById('boot').remove()
-    document.getElementById('desktop').style.display = 'flex'
+const PHI = 1.618033988749895
+let step = 0
+const status = document.getElementById('status')
+
+const bootSteps = [
+  "Detecting hardware...",
+  "6 GB RAM · Snapdragon 7+ · battery 78%",
+  "Optimizing for low energy mode...",
+  "Loading NexusPhi memory bank...",
+  "Applying Φ-scaling to your screen...",
+  "Language: Português (BR) detected",
+  "NexusPhi ready. Welcome home."
+]
+
+function typeWriter(text, i = 0) {
+  if (i < text.length) {
+    status.innerHTML = text.substring(0, i+1) + '<span class="phi">█</span>'
+    setTimeout(() => typeWriter(text, i+1), 60)
+  } else {
+    step++
+    if (step < bootSteps.length) setTimeout(() => typeWriter(bootSteps[step]), 800)
+    else setTimeout(finishBoot, 1200)
   }
 }
-boot()
 
-function openApp(url) {
-  document.getElementById('window').src = url
+function finishBoot() {
+  document.body.style.transition = 'all 1s'
+  document.body.style.transform = 'scale(0.95)'
+  setTimeout(() => {
+    document.getElementById('boot').remove()
+    document.getElementById('desktop').style.display = 'flex'
+    open('nexusphi/chat.html')
+    // primeira fala da NexusPhi
+    setTimeout(() => {
+      const first = "Oi, eu sou a NexusPhi. Acabei de otimizar tudo pro seu celular. O que você quer criar hoje?"
+      document.getElementById('main').contentWindow.postMessage({type:'nexus', text:first}, '*')
+    }, 1000)
+  }, 300)
 }
+
+function open(url) {
+  document.getElementById('main').src = url
+}
+
+// Inicia o boot com NexusPhi no comando
+typeWriter(bootSteps[0])
 </script>
 </body>
 </html>
