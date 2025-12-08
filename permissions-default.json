@@ -1,0 +1,6 @@
+{
+  "internet": "ask",
+  "typing": "ask",
+  "files": "deny",
+  "device": "ask"
+}
