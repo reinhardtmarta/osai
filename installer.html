@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<title>connectOS • bem-vindo(a)</title>
+<style>
+  body{background:#000;color:#0f0;font-family:system-ui;text-align:center;padding:10vh 20px}
+  h1{font-size:3em;margin:0}
+  .phi{color:#ff1493}
+  .card{background:#111;border:2px solid #0f0;margin:30px auto;padding:35px;max-width:600px;border-radius:20px}
+  button{background:#0f0;color:#000;border:none;padding:20px 40px;font-size:1.8em;margin:30px auto;display:block;border-radius:20px;cursor:pointer}
+  small{color:#0a0}
+</style>
+</head>
+<body>
+
+<h1>connect<span class="phi">OS</span></h1>
+<p>Um sistema operacional que respeita você e tudo que você já tem.</p>
+
+<div class="card">
+  <h2>Modo Overlay (recomendado)</h2>
+  <p>Roda por cima do Android, Windows ou Mac<br>
+  Não muda nada · não apaga nada · desinstala em 1 clique<br>
+  Ideal pra quem quer testar ou usar todo dia</p>
+</div>
+
+<div class="card">
+  <h2>Dual-boot (avançado)</h2>
+  <p>Adiciona connectOS ao lado do seu sistema atual<br>
+  Na inicialização você escolhe qual quer usar<br>
+  100 % reversível · nunca apaga seu Android/Windows/Mac</p>
+</div>
+
+<button onclick="install()">INSTALAR connectOS</button>
+
+<small>Nenhum modo apaga seus arquivos, fotos ou apps. Promessa.</small>
+
+<script>
+function install(){
+  const choice = confirm(
+    "Escolha:\n\nOK = Modo Overlay (mais fácil, recomendado)\nCancelar = Dual-boot (mais desempenho)"
+  )
+  
+  if(choice){
+    // MODO OVERLAY — 100% seguro
+    localStorage.setItem('connectos-mode','overlay')
+    if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js')
+    location.href = 'index.html'
+    alert("connectOS Overlay instalado!\nPara desinstalar: Configurações → Apps → connectOS → Desinstalar")
+  } else {
+    // DUAL-BOOT — só adiciona, nunca remove
+    localStorage.setItem('connectos-mode','dualboot')
+    alert("Preparando dual-boot...\nEm 10 segundos você vai reiniciar e verá a tela de escolha.\nPara remover: só escolher 'Remover connectOS' no menu de boot.")
+    setTimeout(()=>{ location.href = 'dualboot-setup.html' }, 3000)
+  }
+}
+</script>
+</body>
+</html>
