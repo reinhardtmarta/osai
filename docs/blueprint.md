@@ -1,4 +1,4 @@
-📘 # ConnectOS — Technical Blueprint (v1.0)
+# 📘  ConnectOS — Technical Blueprint (v1.0)
 
 System Architecture, AI Model Integration, Security, and Execution Framework
 
