@@ -1,149 +1,244 @@
-# 🌐 ConnectOS — The Adaptive Operating Shell  
-### Powered by NexusPhi — the Floating Intelligence
+# 🌐 OSAI — Adaptive Operating Intelligence
 
-ConnectOS is a lightweight, modular, adaptive system layer designed to run **on top of any operating system** without replacing or modifying it.  
-It acts as a universal bridge between devices, apps, inputs, and the user — guided by **NexusPhi**, an AI entity that adapts itself to the user’s behavior, context, and preferences.
+## The Universal AI-Driven OS Layer
 
----
+OSAI is an adaptive, intelligent operating shell that runs on top of any device — Android, Windows, Linux, tablets, and browsers — without replacing or damaging the underlying system.
 
-## 🌀 What Is NexusPhi?
+It is guided by the OSAI Core, a floating, adaptive digital intelligence capable of:
 
-NexusPhi is the *floating intelligence* of ConnectOS.  
-It can:
+learning from user behavior
 
-- adapt to different devices and screen formats  
-- learn from the user’s patterns  
-- optimize memory, performance, and resources  
-- detect bugs, errors, and threats  
-- assist in typing, coding, research, and creation  
-- interact through an on-screen floating UI  
-- ask for permission before accessing private data  
-- organize apps dynamically  
-- restructure workflow in real time  
+optimizing resources dynamically
 
-NexusPhi is fully modular and defined through:
-/nexusphi/core /nexusphi/ui /nexusphi/adapters
+connecting apps and devices
 
-It evolves with the system, and the system evolves with it.
+enhancing security
 
----
+adapting interfaces
 
-## 🏗 ConnectOS Architecture Overview
+automating tasks
 
-connectOS-main/ │ ├── nexusphi/            → AI core (attention, memory, adaptation) ├── system/              → OS-level utilities (config, themes, overlays) ├── security/            → sandbox, firewall, isolation ├── web/                 → interface, panels, settings ├── themes/              → visual themes (CSS) ├── .connectos/          → internal system files (boot, apps, config) └── apps/                → external or user-facing apps (future)
-### 🔥 Why this architecture?
-Because ConnectOS is designed to be:
+generating code, content, or entire workflows
 
-- **portable**  
-- **safe**  
-- **self-contained**  
-- **modular**  
-- **installable anywhere**  
-- **zero-conflict with existing systems**
 
-No overwriting. No system damage. No root access required.
+OSAI does not replace an OS — it becomes a universal layer that brings intelligence, fluidity, and adaptability everywhere.
 
----
 
-## 🎛 Key Modules
+## 🧠 What Is OSAI?
 
-### 🧠 NexusPhi Core
-- memory engine  
-- adaptive engine  
-- attention processor  
-- security guard  
-- performance controller  
-- permissions manager  
+OSAI is a living system composed of:
 
-### 💻 System Layer
-- universal executor  
-- device detection  
-- overlay manager  
-- window manager  
-- theme loader  
+▪ OSAI Core
 
-### 🔒 Security Layer
-- sandbox execution  
-- firewall rules  
-- auto-encryption  
-- behavior isolation  
+The mind of the system — memory, adaptation, attention, performance, intelligence.
 
-### 🪶 Interface Layer
-- floating avatar  
-- spiral motion engine  
-- control panel  
-- dashboard  
-- permissions page  
+▪ OSAI UI
 
-### 🧩 Internal Apps (.connectos/apps)
-- file explorer  
-- minimal browser  
-- python console  
-- universal runner  
-- teach-nexus module  
+The floating interface: avatar, panels, overlays, and micro-windows.
 
----
+▪ OSAI Connect Layer
 
-## 🚀 Installation (Alpha)
-ConnectOS is still under construction.  
-Soon the installation flow will be:
+Bridges apps, devices, APIs, and inputs.
 
-1. Open `installer.html` (new version coming soon)  
-2. ConnectOS loads inside a sandbox  
-3. NexusPhi initializes  
-4. System config generates dynamically  
-5. User chooses:
-   - **enter ConnectOS**
-   - **exit ConnectOS**
+▪ OSAI System Layer
 
----
+Manages windows, themes, overlays, device detection, and the universal executor.
 
-## 🗺 Roadmap 2025
+▪ OSAI Secure Engine
 
-### **Phase 1 — Foundation (CURRENT)**
-✔ folder reorganization  
-✔ boot structure  
-✔ Nexus core modules  
-✔ system layer  
-✔ themes  
-✔ legacy preservation  
+Firewall, sandbox, isolation, threat detection, and auto-clean functions.
 
-### **Phase 2 — NexusPhi Activation**
-⬜ real memory engine  
-⬜ real adaptive engine  
-⬜ attention neural hooks  
-⬜ floating UI interactions  
-⬜ permissions mapping  
+OSAI evolves with the system — and the system evolves with OSAI.
 
-### **Phase 3 — ConnectOS UI**
-⬜ dashboard  
-⬜ settings  
-⬜ panels  
-⬜ real apps integration  
-⬜ universal runner  
+## 🏗 Architecture Overview
 
-### **Phase 4 — Security Core**
-⬜ real sandboxing  
-⬜ capability mapping  
-⬜ threat detection  
-⬜ auto-clean tasks  
+osAI/
+ ├── core/               → intelligence modules (memory, adaptation, attention, security)
+ ├── ui/                 → avatar, panel, animations, interface
+ ├── adapters/           → device, input, system, web adapters
+ │
+system/
+ ├── universal-exec.js   → run anything safely
+ ├── window-manager.js   → open, move, resize panels
+ ├── overlay.js          → floating layer logic
+ ├── device-detect.js    → mobile/tablet/desktop detection
+ └── theme-loader.js     → dynamic theme switching
+ │
+security/
+ ├── sandbox.js
+ ├── firewall.js
+ ├── isolate.js
+ └── auto-encrypt.js
+ │
+web/
+ ├── dashboard.html
+ ├── osai-panel.html
+ ├── settings.html
+ ├── permissions.html
+ └── legacy/             → old interface versions
+ │
+.connectos/
+ ├── boot/               → OSAI bootloader
+ ├── apps/               → internal mini-apps
+ └── system/             → low-level configs
+ │
+themes/
+ ├── light-theme.css
+ ├── dark-theme.css
+ ├── neon-theme.css
+ ├── high-contrast.css
+ └── noite-estrelada.css
 
-### **Phase 5 — Cross-Device Execution**
-⬜ Android  
-⬜ Windows  
-⬜ Linux  
-⬜ Web Execution  
-⬜ Browser Extension Mode  
 
----
+## 🌀 OSAI Core — Intelligence Modules
 
-## 📜 License  
-MIT — free to use, modify, and build upon.
+The OSAI Core is composed of:
 
----
+🧠 1. Memory Engine
 
-## 🧩 About the Creator  
-Project maintained by **Marta Reinhardt**, architect & independent researcher.  
-Focused on adaptive systems, universal usability, and human-centered design.
+Short-term memory with auto-expiration + long-term persistent memory.
 
----
+🔄 2. Adaptive Engine
+
+Learns user patterns and predicts future actions.
+
+🎯 3. OSAI Attention Engine
+
+Determines where OSAI should focus based on context.
+
+⚡ 4. Performance Manager
+
+Monitors CPU/RAM and suggests optimizations.
+
+🔐 5. Security Guard
+
+Analyzes behavior, blocks suspicious actions, protects the system.
+
+💬 6. Personality Module (coming soon)
+
+OSAI will develop a customizable personality aligned with each user.
+
+## 🎛 System Features
+
+▪ Adaptive UI
+
+A floating interface that adjusts itself to each device and workflow.
+
+▪ Universal App Execution
+
+Run apps, code or tasks in a sandbox — safely and isolated.
+
+▪ Auto-Optimization
+
+Performance tuning, memory cleaning, and adaptive layouts.
+
+▪ Automatic Security
+
+Firewall, sandbox, permission scanning, real-time threat detection.
+
+▪ Personalized Assist Mode
+
+OSAI assists in typing, research, coding, writing, organizing — according to user preferences.
+
+▪ Non-Intrusive Mode
+
+OSAI runs on top of any OS, without modifying or overwriting anything.
+
+## 🚀 Boot Process (OSAI Loader)
+
+1. Device detection
+
+
+2. Load config
+
+
+3. Load theme
+
+
+4. Initialize security layer
+
+
+5. Load system modules
+
+
+6. Activate OSAI Core
+
+
+7. Start the floating UI
+
+
+8. Enter adaptive mode
+
+
+
+The boot is safe, light, and works in the browser, phone, PC, or virtual environment.
+
+
+## 🔒 Security Philosophy
+
+OSAI is built with user control as the central rule:
+
+OSAI always asks permission before accessing private data
+
+Users can erase OSAI memory anytime
+
+All apps run in sandbox mode
+
+No modification to the base OS
+
+Zero hidden operations
+
+Fully transparent logs (coming soon)
+
+
+## 🛣 Roadmap 2025
+
+Phase 1 — Architecture & Migration (DONE)
+
+✔ Renamed to OSAI
+✔ Organized modules
+✔ Bootloader updated
+✔ OSAI Core structure created
+
+Phase 2 — OSAI Core Intelligence
+
+⬜ real-time memory
+⬜ adaptive predictions
+⬜ attention context
+⬜ OSAI personality
+
+Phase 3 — OSAI Interface
+
+⬜ osai-panel
+⬜ avatar movement
+⬜ touch interactions
+⬜ universal windows
+
+Phase 4 — OSAI Secure Engine
+
+⬜ live threat detection
+⬜ micro-sandbox
+⬜ capability mapping
+
+Phase 5 — Cross-OS Expansion
+
+⬜ Android installer
+⬜ Windows portable mode
+⬜ Web app launcher
+⬜ .apk version
+
+
+
+## 🧩 Creator
+
+Project created and maintained by Marta Reinhardt —
+Software Architect, researcher, and creator of adaptive system concepts integrating AI, UX, and universal OS behavior.
+
+
+## 📜 License
+
+MIT License — free to build, modify and expand.
+
+
+🌟 OSAI is not just an OS layer — it’s an intelligent companion that adapts to you.
+
