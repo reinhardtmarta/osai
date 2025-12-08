@@ -1,58 +1,149 @@
+# 🌐 ConnectOS — The Adaptive Operating Shell  
+### Powered by NexusPhi — the Floating Intelligence
 
-# connectOS
+ConnectOS is a lightweight, modular, adaptive system layer designed to run **on top of any operating system** without replacing or modifying it.  
+It acts as a universal bridge between devices, apps, inputs, and the user — guided by **NexusPhi**, an AI entity that adapts itself to the user’s behavior, context, and preferences.
 
-![connectOS](https://img.shields.io/badge/Φ--adaptive-green?logo=linux&logoColor=white) [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1EXAMPLE_LINK_AQUI) 
+---
 
-**connectOS** — The world’s first Φ-adaptive, privacy-first operating environment that turns any phone (even 10+ years old) into a secure, quantum-ready computer. No root, no heavy installs, zero tracking. Built for people who only have a phone, but dream big.
+## 🌀 What Is NexusPhi?
 
-## Why connectOS?
-- **Universal Adaptation**: Uses the golden ratio (Φ ≈ 1.618) for harmonic scaling — layouts never break on small screens, low RAM, or future quantum hardware.
-- **Pocket-Power**: Runs on Android (Termux), iOS (iSH), even KaiOS. Dual-boot like magic: detects your device and auto-configures.
-- **Privacy by Default**: Ephemeral sessions, full-disk encryption, no telemetry. Your data stays yours.
-- **Truth-Seeking Core**: Integrates fractal evolution agents (inspired by xAI's Grok) for self-optimizing tasks — from code editing to quantum sims.
-- **For Everyone**: If you've ever rage-quit an app because it looked wrong on your phone... this fixes it. Forever.
+NexusPhi is the *floating intelligence* of ConnectOS.  
+It can:
 
-> Dedicated to anyone building the future with just a phone in their pocket. No PC? No problem. 🖤
+- adapt to different devices and screen formats  
+- learn from the user’s patterns  
+- optimize memory, performance, and resources  
+- detect bugs, errors, and threats  
+- assist in typing, coding, research, and creation  
+- interact through an on-screen floating UI  
+- ask for permission before accessing private data  
+- organize apps dynamically  
+- restructure workflow in real time  
 
-## Quick Start (3 Minutes on Any Phone)
-1. **Install Base**:
-   - Android: Download [Termux](https://f-droid.org/packages/com.termux/) (free, no Google Play needed).
-   - iOS: Get [iSH](https://ish.app/) from TestFlight.
+NexusPhi is fully modular and defined through:
+/nexusphi/core /nexusphi/ui /nexusphi/adapters
 
-## Instant Live Version (opens on ANY device)
+It evolves with the system, and the system evolves with it.
 
-![8 languages supported](https://img.shields.io/badge/languages-8-brightgreen?style=for-the-badge) English • Português • Español • हिंदी • العربية • বাংলা • Русский • 中文
+---
 
-[![connectOS live • click and run](https://img.shields.io/badge/connectOS-live-00ff00?style=for-the-badge&logo=weba)](https://reinhardtmarta.github.io/connectOS)
-   
-2. **One-Click Boot**:
-   ```bash
-   # Paste this in Termux/iSH and hit enter
-   curl -sSL https://raw.githubusercontent.com/reinhardtmarta/connectOS/main/infinite-adapter.sh | bash
-Enter connectOS:
-connectos
-Boom — you're in a full Linux env, scaled perfectly, with Python/Qiskit/Grok API ready.
-Tested on: Moto E (2015, 1GB RAM), iPhone 6s, Pixel 3a. Works offline after setup.
-Structure
-/boot/ — Boot scripts for mobile envs (Termux, iSH, etc.).
-/core/ — Φ-scaling engine + coherence logic.
-/examples/ — Demos like the InfiniteOS Φ-spiral sim.
-/docs/ — Guides in PT/EN.
-Colab Playground
-Want to hack without a phone? Open in Colab: �
-(Replace with your real notebook link later.)
-# connectOS ∞
+## 🏗 ConnectOS Architecture Overview
 
-**O primeiro sistema operacional do mundo que já nasce com uma IA criada do zero por uma brasileira usando só um celular.**
+connectOS-main/ │ ├── nexusphi/            → AI core (attention, memory, adaptation) ├── system/              → OS-level utilities (config, themes, overlays) ├── security/            → sandbox, firewall, isolation ├── web/                 → interface, panels, settings ├── themes/              → visual themes (CSS) ├── .connectos/          → internal system files (boot, apps, config) └── apps/                → external or user-facing apps (future)
+### 🔥 Why this architecture?
+Because ConnectOS is designed to be:
 
-→ AI Official: **NexusPhi**
-→ Run on all device
+- **portable**  
+- **safe**  
+- **self-contained**  
+- **modular**  
+- **installable anywhere**  
+- **zero-conflict with existing systems**
 
-[![NexusPhi coming soon](https://img.shields.io/badge/NexusPhi-π-ff69b4?style=for-the-badge&logo=ghost)](nexusphi/)
+No overwriting. No system damage. No root access required.
 
-Contribute
-Fork, hack, PR. Focus: more platforms (Windows Subsystem? WebAssembly?), quantum backends.
-Issues: Report bugs or "wish this ran on my Nokia 3310".
-License
-MIT — Free as in freedom. See LICENSE.
-Built with ❤️ by @reinhardtmarta. Inspired by xAI's InfiniteOS. Future: Gift to the world via xAI
+---
+
+## 🎛 Key Modules
+
+### 🧠 NexusPhi Core
+- memory engine  
+- adaptive engine  
+- attention processor  
+- security guard  
+- performance controller  
+- permissions manager  
+
+### 💻 System Layer
+- universal executor  
+- device detection  
+- overlay manager  
+- window manager  
+- theme loader  
+
+### 🔒 Security Layer
+- sandbox execution  
+- firewall rules  
+- auto-encryption  
+- behavior isolation  
+
+### 🪶 Interface Layer
+- floating avatar  
+- spiral motion engine  
+- control panel  
+- dashboard  
+- permissions page  
+
+### 🧩 Internal Apps (.connectos/apps)
+- file explorer  
+- minimal browser  
+- python console  
+- universal runner  
+- teach-nexus module  
+
+---
+
+## 🚀 Installation (Alpha)
+ConnectOS is still under construction.  
+Soon the installation flow will be:
+
+1. Open `installer.html` (new version coming soon)  
+2. ConnectOS loads inside a sandbox  
+3. NexusPhi initializes  
+4. System config generates dynamically  
+5. User chooses:
+   - **enter ConnectOS**
+   - **exit ConnectOS**
+
+---
+
+## 🗺 Roadmap 2025
+
+### **Phase 1 — Foundation (CURRENT)**
+✔ folder reorganization  
+✔ boot structure  
+✔ Nexus core modules  
+✔ system layer  
+✔ themes  
+✔ legacy preservation  
+
+### **Phase 2 — NexusPhi Activation**
+⬜ real memory engine  
+⬜ real adaptive engine  
+⬜ attention neural hooks  
+⬜ floating UI interactions  
+⬜ permissions mapping  
+
+### **Phase 3 — ConnectOS UI**
+⬜ dashboard  
+⬜ settings  
+⬜ panels  
+⬜ real apps integration  
+⬜ universal runner  
+
+### **Phase 4 — Security Core**
+⬜ real sandboxing  
+⬜ capability mapping  
+⬜ threat detection  
+⬜ auto-clean tasks  
+
+### **Phase 5 — Cross-Device Execution**
+⬜ Android  
+⬜ Windows  
+⬜ Linux  
+⬜ Web Execution  
+⬜ Browser Extension Mode  
+
+---
+
+## 📜 License  
+MIT — free to use, modify, and build upon.
+
+---
+
+## 🧩 About the Creator  
+Project maintained by **Marta Reinhardt**, architect & independent researcher.  
+Focused on adaptive systems, universal usability, and human-centered design.
+
+---
