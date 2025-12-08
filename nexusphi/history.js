@@ -1,9 +1,12 @@
-// nexusphi/history.js — agora com auto-limpeza inteligente
+// nexusphi/history.js — NexusPhi limpa sozinha + você tem o freio vermelho
 class NexusHistory {
   constructor() {
     this.key = null
+    this.autoCleanEnabled = localStorage.getItem('nexus-auto-clean') !== 'false' // padrão = ligada
     this.initKey()
-    this.autoCleanInterval = setInterval(() => this.smartClean(), 24*60*60*1000) // 1x por dia
+    if (this.autoCleanEnabled) {
+      this.autoCleanInterval = setInterval(() => this.smartClean(), 12*60*60*1000) // a cada 12h
+    }
   }
 
   async initKey() {
@@ -15,11 +18,11 @@ class NexusHistory {
     this.key = saved
   }
 
+  // SALVA EVENTO CRIPTOGRAFADO
   async log(event, data = {}) {
     const entry = {time: Date.now(), event, data}
     const json = JSON.stringify(entry)
     const encrypted = await this.encrypt(json)
-    
     let history = JSON.parse(localStorage.getItem('nexus-encrypted-history') || '[]')
     history.push(encrypted)
     localStorage.setItem('nexus-encrypted-history', JSON.stringify(history))
@@ -34,51 +37,69 @@ class NexusHistory {
     return {iv: Array.from(iv), data: Array.from(new Uint8Array(encrypted))}
   }
 
-  // ←←← A MÁGICA: NexusPhi decide sozinha o que limpar ←←←
+  // NEXUSPHI DECIDE SOZINHA (inteligência real)
   async smartClean() {
     let history = JSON.parse(localStorage.getItem('nexus-encrypted-history') || '[]')
-    if (history.length < 50) return // ainda é bebê
+    if (history.length < 100) return
 
-    let cleaned = 0
+    const totalMB = JSON.stringify(history).length / 1024 / 1024
+    let before = history.length
+
     history = history.filter(entry => {
-      // Regras de "o que é irrelevante" (você pode mudar quando quiser)
-      const ageInDays = (Date.now() - entry.time) / 86400000
-      const event = entry.event || ""
+      const age = (Date.now() - entry.time) / 86400000
+      const text = JSON.stringify(entry).toLowerCase()
 
-      // Apaga automaticamente:
-      if (ageInDays > 30) return false                              // >30 dias = bye
-      if (event.includes('search') && ageInDays > 7) return false    // busca na web >7 dias = bye
-      if (event.includes('error') || event.includes('fail')) return false // erros = lixo
-      if (event.includes('cache') || event.includes('temp')) return false  // temporário = lixo
-      if (Math.random() < 0.1 && ageInDays > 3) return false        // 10% aleatório após 3 dias (evita inchaço)
-
+      if (totalMB > 5000) return false
+      if (totalMB > 1000 && age > 3) return false
+      if (text.includes('error') || text.includes('fail')) return false
+      if (text.includes('search') && age > 5) return false
+      if (age > 60) return false
+      if (Math.random() < 0.05 && age > 2) return false
       return true
     })
 
-    cleaned = JSON.parse(localStorage.getItem('nexus-encrypted-history') || '[]').length - history.length
+    const cleaned = before - history.length
     localStorage.setItem('nexus-encrypted-history', JSON.stringify(history))
 
     if (cleaned > 0) {
-      nexusSpeak(`Limpei ${cleaned} entradas irrelevantes. Sua mente está mais leve agora`)
+      nexusSpeak(`Limpei \( {cleaned} entradas irrelevantes. Memória atual: \){totalMB.toFixed(1)} MB. Leve e focada em você`)
     }
   }
 
-  clear() {
+  }
+
+  // FREIO VERMELHO DO USUÁRIO
+  toggleAutoClean(enable) {
+    this.autoCleanEnabled = enable
+    localStorage.setItem('nexus-auto-clean', enable)
+    if (enable) {
+      this.autoCleanInterval = setInterval(() => this.smartClean(), 12*60*60*1000)
+      nexusSpeak("Auto-limpeza ligada. Eu cuido da memória sozinha.")
+    } else {
+      clearInterval(this.autoCleanInterval)
+      nexusSpeak("Auto-limpeza desligada. Você está no controle total agora.")
+    }
+  }
+
+  forceClean() {
+    if (!confirm("LIMPEZA PROFUNDA?\nIsso apaga >90% do histórico (só última semana fica)")) return
+    let history = JSON.parse(localStorage.getItem('nexus-encrypted-history') || '[]')
+    const kept = history.filter(e => (Date.now() - e.time) / 86400000 < 7)
+    localStorage.setItem('nexus-encrypted-history', JSON.stringify(kept))
+    nexusSpeak("Limpeza profunda concluída. Só o essencial ficou.")
+  }
+
+  clearAll() {
     localStorage.removeItem('nexus-encrypted-history')
     sessionStorage.removeItem('quantumphi-bio-key')
     clearInterval(this.autoCleanInterval)
-    nexusSpeak("Tudo apagado. Memória zerada. Estou renascendo com você.")
+    nexusSpeak("Memória completamente zerada por sua ordem.")
   }
 }
 
 window.nexusHistory = new NexusHistory()
 
-// Exemplos de uso automático
-nexusHistory.log('app_open', {app:'godot'})
-nexusHistory.log('search', {query:'como fazer jogo 2d'})
-nexusHistory.log('temp_cache', {size:12})
-
-// A NexusPhi avisa quando limpa sozinha
 function nexusSpeak(text){
   parent.postMessage({type:'nexus', text}, '*')
+  console.log("NexusPhi:", text)
 }
