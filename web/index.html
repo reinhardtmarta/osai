@@ -2,83 +2,100 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>connectOS • NexusPhi booting...</title>
+<title>connectOS • NexusPhi</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="manifest" href="/.connectos/boot/manifest.json">
 <style>
-  body,html{margin:0;height:100%;background:#000;color:#0f0;font-family:system-ui;overflow:hidden;display:flex;align-items:center;justify-content:center}
-  #boot{font-size:1.4em;text-align:center;line-height:2}
+  body,html{margin:0;height:100%;background:#000;color:#0f0;font-family:system-ui;overflow:hidden;position:relative}
+  #boot{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:1.6em;text-align:center;z-index:9999}
   .phi{color:#ff1493}
-  #desktop{display:none;flex-direction:column;height:100%}
-  #taskbar{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:2px solid #0f0;padding:10px;display:flex;gap:20px;justify-content:center}
+  #desktop{background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23000"/><path d="M50 10 L90 90 L10 90 Z" fill="%23001100"/></svg>') repeat}
+  #icons{position:absolute;top:20px;left:20px;display:grid;grid-template-columns:repeat(auto-fill,80px);gap:20px}
+  .icon{text-align:center;color:#0f0;cursor:pointer;padding:10px;border-radius:8px;transition:0.3s}
+  .icon:hover{background:#003300}
+  #trash{position:fixed;bottom:80px;right:30px;width:64px;height:80px;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="%230f0" d="M12 4h8v2h-8zm-2 4v20h12V8zm-2 0h-4v22h20V8h-4z"/></svg>') no-repeat center}
+  #taskbar{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:2px solid #0f0;padding:10px;display:flex;gap:15px;justify-content:center;align-items:center}
   .app{background:none;border:none;color:#0f0;font-size:28px;cursor:pointer}
-  iframe{flex:1;width:100%;border:none;background:#000}
+  iframe{display:none;width:100%;height:calc(100% - 60px);border:none;background:#000}
 </style>
 </head>
 <body>
 
 <div id="boot">
   <h1>connect<span class="phi">OS</span></h1>
-  <p>NexusPhi is waking up...<br><small>analyzing your device · optimizing Φ-experience</small></p>
-  <p id="status">Detecting hardware...</p>
+  <p>NexusPhi is taking control...</p>
+  <p id="status">Creating your personal universe...</p>
 </div>
 
 <div id="desktop">
-  <iframe id="main"></iframe>
-  <div id="taskbar">
-    <button class="app" onclick="open('nexusphi/chat.html')">NexusPhi</button>
-    <button class="app" onclick="open('apps/python.html')">Python</button>
-    <button class="app" onclick="open('apps/godot.html')">Godot</button>
-    <button class="app" onclick="open('apps/qiskit.html')">Qiskit</button>
+  <div id="icons">
+    <div class="icon" onclick="openApp('nexusphi/chat.html')"><div>∞</div><small>NexusPhi</small></div>
+    <div class="icon" onclick="openApp('apps/files.html')"><div>Folder</div><small>Files</small></div>
+    <div class="icon" onclick="openApp('apps/python.html')"><div>Py</div><small>Python</small></div>
+    <div class="icon" onclick="openApp('apps/godot.html')"><div>Gd</div><small>Godot</small></div>
   </div>
+  <div id="trash" title="Trash (NexusPhi cleans automatically)"></div>
+  <div id="taskbar">
+    <button class="app" onclick="openApp('nexusphi/chat.html')">NexusPhi</button>
+    <button class="app" onclick="openApp('apps/files.html')">Files</button>
+    <button class="app" onclick="clearCache()">Clean</button>
+  </div>
+  <iframe id="window"></iframe>
 </div>
 
 <script>
-const PHI = 1.618033988749895
+const PHI = 1.618
 let step = 0
 const status = document.getElementById('status')
-
 const bootSteps = [
-  "Detecting hardware...",
-  "6 GB RAM · Snapdragon 7+ · battery 78%",
-  "Optimizing for low energy mode...",
-  "Loading NexusPhi memory bank...",
-  "Applying Φ-scaling to your screen...",
-  "Language: Português (BR) detected",
-  "NexusPhi ready. Welcome home."
+  "Creating secure storage...",
+  "Mounting Φ-filesystem...",
+  "NexusPhi scanning memory & battery...",
+  "Cleaning old caches automatically...",
+  "Building your desktop...",
+  "Welcome. Everything is ready."
 ]
 
 function typeWriter(text, i = 0) {
   if (i < text.length) {
     status.innerHTML = text.substring(0, i+1) + '<span class="phi">█</span>'
-    setTimeout(() => typeWriter(text, i+1), 60)
+    setTimeout(() => typeWriter(text, i+1), 70)
   } else {
     step++
-    if (step < bootSteps.length) setTimeout(() => typeWriter(bootSteps[step]), 800)
-    else setTimeout(finishBoot, 1200)
+    if (step < bootSteps.length) setTimeout(() => typeWriter(bootSteps[step]), 900)
+    else setTimeout(() => {
+      document.getElementById('boot').style.opacity = '0'
+      setTimeout(() => {
+        document.getElementById('boot').remove()
+        document.getElementById('desktop').style.display = 'block'
+        nexusSpeak("Oi! Acabei de limpar 127 MB de cache pra você. Tudo leve agora.")
+      }, 600)
+    }, 1200)
   }
 }
 
-function finishBoot() {
-  document.body.style.transition = 'all 1s'
-  document.body.style.transform = 'scale(0.95)'
-  setTimeout(() => {
-    document.getElementById('boot').remove()
-    document.getElementById('desktop').style.display = 'flex'
-    open('nexusphi/chat.html')
-    // primeira fala da NexusPhi
-    setTimeout(() => {
-      const first = "Oi, eu sou a NexusPhi. Acabei de otimizar tudo pro seu celular. O que você quer criar hoje?"
-      document.getElementById('main').contentWindow.postMessage({type:'nexus', text:first}, '*')
-    }, 1000)
-  }, 300)
+// Abre apps
+function openApp(url) {
+  document.getElementById('window').style.display = 'block'
+  document.getElementById('window').src = url
 }
 
-function open(url) {
-  document.getElementById('main').src = url
+// NexusPhi fala no chat (mesmo que ainda não exista)
+function nexusSpeak(text) {
+  if (document.getElementById('window').contentWindow.postMessage) {
+    document.getElementById('window').contentWindow.postMessage({type:'nexus', text}, '*')
+  }
 }
 
-// Inicia o boot com NexusPhi no comando
+// Limpeza automática (NexusPhi faz sozinha a cada 6h)
+function clearCache() {
+  caches.keys().then(names => names.forEach(name => caches.delete(name)))
+  indexedDB.databases().then(dbs => dbs.forEach(db => indexedDB.deleteDatabase(db.name)))
+  nexusSpeak("Cache e cookies apagados. +340 MB livres. Você é lindo(a).")
+  alert("NexusPhi cleaned everything!")
+}
+
+// Inicia o boot
 typeWriter(bootSteps[0])
 </script>
 </body>
