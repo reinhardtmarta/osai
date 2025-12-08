@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<title>PhiBoard • connectOS</title>
+<style>
+  body{background:#000;color:#0f0;font-family:system-ui;margin:0;overflow:hidden;position:relative}
+  #input{position:fixed;top:10px;left:10px;right:10px;padding:20px;background:#111;color:#0f0;font-size:1.8em;border:none;outline:none}
+  #suggestion{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#001100;padding:12px 25px;border-radius:30px;font-size:1.4em;opacity:0;transition:.4s;z-index:99}
+  #suggestion.show{opacity:1}
+  #kb{height:300px;background:#111;border-top:3px solid #0f0;display:grid;grid-template-rows:repeat(6,1fr);padding:10px;gap:8px;box-sizing:border-box}
+  .row{display:grid;grid-template-columns:repeat(10,1fr);gap:8px}
+  button{background:#222;color:#0f0;border:2px solid #0f0;padding:12px;font-size:1.3em;border-radius:12px;flex:1}
+  button:active{background:#0f0;color:#000}
+  #lang-btn{background:#b8860b;color:#000;font-weight:bold}
+  #nexus-help{background:#400;color:#ff1493;padding:12px;font-weight:bold}
+  #nexus-help.active{background:#0f0;color:#000}
+</style>
+</head>
+<body>
+
+<input id="input" placeholder="Escreva ou fale..." autofocus>
+
+<div id="suggestion"></div>
+
+<div id="kb">
+  <div class="row" id="row1"></div>
+  <div class="row" id="row2"></div>
+  <div class="row" id="row3"></div>
+  <div class="row" id="row4"></div>
+  <div class="row" style="grid-template-columns:1fr 1fr 6fr 1fr 1fr">
+    <button id="lang-btn">Lang</button>
+    <button id="nexus-help">Nexus ajuda?</button>
+    <button>Space</button>
+    <button id="voice">Mic</button>
+    <button>Hide</button>
+  </div>
+</div>
+
+<script>
+// 8 teclados oficiais do connectOS
+const layouts = {
+  pt: [
+    ['q','w','e','r','t','y','u','i','o','p'],
+    ['a','s','d','f','g','h','j','k','l','ç'],
+    ['z','x','c','v','b','n','m',',','.','Backspace'],
+    ['123','Space','Space','Space','Space','Space','Space','Enter']
+  ],
+  en: [
+    ['q','w','e','r','t','y','u','i','o','p'],
+    ['a','s','d','f','g','h','j','k','l'],
+    ['z','x','c','v','b','n','m',',','.','Backspace'],
+    ['123','Space','Space','Space','Space','Space','Space','Enter']
+  ],
+  es: [
+    ['q','w','e','r','t','y','u','i','o','p'],
+    ['a','s','d','f','g','h','j','k','l','ñ'],
+    ['z','x','c','v','b','n','m',',','.','Backspace'],
+    ['123','Space','Space','Space','Space','Space','Space','Enter']
+  ],
+  hi: [
+    ['क','ख','ग','घ','ङ','च','छ','ज','झ','ञ'],
+    ['ट','ठ','ड','ढ','ण','त','थ','द','ध','न'],
+    ['प','फ','ब','भ','म','य','र','ल','व','Backspace'],
+    ['123','Space','Space','Space','Space','Space','Space','Space','Enter']
+  ],
+  ar: [
+    ['ض','ص','ث','ق','ف','غ','ع','ه','خ','ح'],
+    ['ش','س','ي','ب','ل','ا','ت','ن','م','ك'],
+    ['ظ','ط','ذ','د','ز','ر','و','ة','Backspace'],
+    ['123','Space','Space','Space','Space','Space','Space','Enter']
+  ],
+  zh: [
+    ['q','w','e','r','t','y','u','i','o','p'],
+    ['a','s','d','f','g','h','j','k','l'],
+    ['z','x','c','v','b','n','m',',','.'],
+    ['切换','Space','Space','Space','Space','Space','Space','返回']
+  ],
+  ru: [
+    ['й','ц','у','к','е','н','г','ш','щ','з'],
+    ['ф','ы','в','а','п','р','о','л','д','ж'],
+    ['я','ч','с','м','и','т','ь','б','ю','Backspace'],
+    ['123','Space','Space','Space','Space','Space','Space','Enter']
+  ],
+  bn: [
+    ['ক','খ','গ','ঘ','ঙ','চ','ছ','জ','ঝ','ঞ'],
+    ['ট','ঠ','ড','ঢ','ণ','ত','থ','দ','ধ','ন'],
+    ['প','ফ','ব','ভ','ম','য','র','ল','ও','Backspace'],
+    ['123','Space','Space','Space','Space','Space','Space','Enter']
+  ]
+}
+
+let currentLang = localStorage.getItem('connectos-lang') || 'pt'
+
+function loadKeyboard(lang){
+  currentLang = lang
+  localStorage.setItem('connectos-lang', lang)
+  document.getElementById('lang-btn').textContent = lang.toUpperCase()
+  
+  const rows = ['row1','row2','row3','row4']
+  rows.forEach((id,i) => {
+    const row = document.getElementById(id)
+    row.innerHTML = ''
+    layouts[lang][i].forEach(key => {
+      const btn = document.createElement('button')
+      btn.textContent = key
+      btn.onclick = () => typeKey(key)
+      row.appendChild(btn)
+    })
+  })
+}
+
+// Digita a tecla
+function typeKey(key){
+  const input = document.getElementById('input')
+  if(key === 'Backspace') input.value = input.value.slice(0,-1)
+  else if(key === 'Enter') input.value += '\n'
+  else if(key === 'Space') input.value += ' '
+  else input.value += key
+  input.focus()
+}
+
+// Troca idioma
+document.getElementById('lang-btn').onclick = () => {
+  const langs = Object.keys(layouts)
+  const next = langs.indexOf(currentLang)
+  const next = langs[(i + 1) % langs.length]
+  loadKeyboard(next)
+}
+
+// Inicia com o idioma salvo
+loadKeyboard(currentLang)
+</script>
+</body>
+</html>
