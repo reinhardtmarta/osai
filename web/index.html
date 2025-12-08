@@ -1,61 +1,64 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>connectOS • live</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>∞</text></svg>">
+  <title>connectOS • NexusPhi</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#000">
+  <link rel="manifest" href="data:application/manifest+json,{\"name\":\"connectOS\",\"short_name\":\"connectOS\",\"start_url\":\".\",\"display\":\"standalone\",\"background_color\":\"#000\",\"theme_color\":\"#0f0\",\"icons\":[{\"src\":\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>∞</text></svg>\",\"sizes\":\"any\"}]}">
   <style>
-    body,html{margin:0;height:100%;background:#000;color:#0f0;font-family:monospace}
-    #terminal{width:100%;height:100%}
+    body,html{margin:0;height:100%;background:#000;color:#0f0;font-family:system-ui;overflow:hidden;display:flex;flex-direction:column}
+    #welcome{font-size:1.8em;text-align:center;margin:2rem 1rem}
+    #input{background:#111;border:none;outline:none;padding:20px;font-size:18px;color:#0f0;flex:1}
+    #suggestion{background:#001a00;padding:15px;font-size:16px;position:fixed;bottom:0;width:100%;opacity:0;transition:opacity .5s}
+    #suggestion.show{opacity:1}
+    select{background:#000;color:#0f0;border:1px solid #0f0;padding:8px;position:fixed;top:10px;right:10px;z-index:99}
   </style>
 </head>
 <body>
-  <div id="terminal"></div>
+  <div id="welcome">Loading language...</div>
+  <textarea id="input" placeholder="..."></textarea>
+  <div id="suggestion">NexusPhi is listening...</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.js"></script>
-  <script type="module">
-    import { Terminal } from 'https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js';
-    import { FitAddon } from 'https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.js';
-    
-    const term = new Terminal({theme:{background:'#000',foreground:'#0f0'}});
-    const fit = new FitAddon();
-    term.loadAddon(fit);
-    term.open(document.getElementById('terminal'));
-    fit.fit();
+  <script>
+    const PHI = 1.618;
+    function adapt() {
+      const scale = window.innerWidth < 500 ? 0.9 : window.innerWidth > 1200 ? 1.4 : 1.1;
+      document.body.style.fontSize = (16 * scale) + 'px';
+    }
+    adapt(); window.onresize = adapt;
 
-    const PHI = 1.61803398874989;
-    let scale = 1;
+    // Auto language detection + switcher
+    const userLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0];
+    let txt = {};
 
-    function phiAdapt() {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      scale = w < 500 ? 0.8 : w > 1500 ? 1.5 : 1;
-      term.writeln("\r\n∞ connectOS • Φ-adaptive live shell");
-      term.writeln(`Resolution: \( {w}× \){h} • Φ-scale: ${scale.toFixed(2)}`);
-      term.writeln("Type 'help' • Python/Qiskit ready • Offline-capable");
-      term.prompt();
+    async function loadLang(code) {
+      try {
+        const res = await fetch(`lang/${code}.json`);
+        txt = res.ok ? await res.json() : await (await fetch('lang/en.json')).json();
+      } catch { txt = await (await fetch('lang/en.json')).json(); }
+      document.title = `\( {txt.os_name} • \){txt.ai_name}`;
+      document.getElementById('welcome').innerText = txt.welcome;
+      document.getElementById('input').placeholder = txt.placeholder;
+      document.getElementById('suggestion').innerText = txt.offline;
+      document.querySelector('select').value = code;
     }
 
-    term.prompt = () => term.write("\r\nφ> ");
-    term.writeln("Booting connectOS web shell...");
-    phiAdapt();
-
-    window.addEventListener('resize', () => { fit.fit(); phiAdapt(); });
-
-    // Simula shell básico (pode conectar com WebAssembly + emscripten depois)
-    term.onData(data => {
-      if (data === '\r') {
-        term.writeln('');
-        term.prompt();
-      } else if (data === '\u007f') { // backspace
-        if (term._core.buffer.x > 4) term.write('\b \b');
-      } else {
-        term.write(data);
-      }
-    });
+    // Language switcher
+    document.body.insertAdjacentHTML('beforeend', `
+      <select id="lang-switch">
+        <option value="en">English</option>
+        <option value="pt">Português (BR)</option>
+        <option value="es">Español</option>
+        <option value="hi">हिंदी</option>
+        <option value="ar">العربية</option>
+        <option value="bn">বাংলা</option>
+        <option value="ru">Русский</option>
+        <option value="zh">简体中文</option>
+      </select>
+    `);
+    document.getElementById('lang-switch').onchange = e => loadLang(e.target.value);
+    loadLang(userLang);
   </script>
 </body>
 </html>
