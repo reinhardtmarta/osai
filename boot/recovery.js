@@ -1,2 +1,2 @@
-// Recovery mode in case of boot failures
-// Safe mode for ConnectOS
+// ConnectOS Recovery Mode
+// Safe fallback in case of system errors
