@@ -1,0 +1,8 @@
+{
+  "nexusphi": {
+    "allow_internet": false,
+    "allow_typing": false,
+    "allow_read_files": false,
+    "allow_device_access": false
+  }
+}
