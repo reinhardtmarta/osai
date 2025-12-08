@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<title>Files • OSAI</title>
+<style>
+  body{background:#000;color:#0f0;font-family:system-ui;margin:0;padding:20px}
+  .file,.folder{padding:12px;margin:6px 0;background:#111;cursor:pointer;border-radius:8px}
+  .folder{background:#002200}
+  input{background:#111;color:#0f0;border:1px solid #0f0;padding:10px;width:100%;margin:20px 0}
+</style>
+</head>
+<body>
+<h1>/home/your-name</h1>
+<input id="newname" placeholder="Novo arquivo ou pasta...">
+<button onclick="create()">Criar</button>
+<div id="list"></div>
+
+<script>
+// Sistema de arquivos 100 % local (IndexedDB)
+const db = indexedDB.open('OSAI-fs',1)
+db.onupgradeneeded = e => e.target.result.createObjectStore('files',{keyPath:'name'})
+db.onsuccess = e => {store=e.target.result.transaction('files','readwrite').objectStore('files'); list()}
+
+function create(){
+  const name = prompt("Nome do arquivo ou pasta:")
+  if(!name) return
+  const isFolder = name.endsWith('/')
+  store.put({name, content:'', isFolder, created:Date.now()})
+  list()
+}
+
+function list(){
+  store.getAll().onsuccess = e => {
+    const div = document.getElementById('list')
+    div.innerHTML = ''
+    e.target.result.forEach(f=>{
+      const el = document.createElement('div')
+      el.className = f.isFolder?'folder':'file'
+      el.innerText = (f.isFolder?'Folder ':'File ') + f.name
+      el.ondblclick = ()=>f.isFolder?alert('Entrar na pasta ainda não feito'):edit(f.name)
+      el.onclick = ()=>confirm('Excluir '+f.name+'?')&&store.delete(f.name).onsuccess=list
+      div.appendChild(el)
+    })
+  }
+}
+</script>
+</body></html>
