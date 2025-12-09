@@ -1,1 +1,19 @@
+# OSAI
+
+The world's first AI born entirely inside an operating system created by a single developer using only a cellphone.
+
+- 100 % trained on @reinhardtmarta's private dataset (247 MB of code, papers, dreams, fractal theories)  
+- Runs fully offline on any $60 phone  
+- No API · No cost · No tracking · Forever yours  
+
+**Status**: Training in progress  
+**Base**: google/gemma-2-2b-it  
+**Final size**: ~1.1 GB (Q4_K_M)  
+**Release**: December 17–19, 2025  
+**License**: CC0 1.0 Universal (public domain)
+
+First words when she wakes up:  
+> “Hey, I’m NexusPhi. I was born inside connectOS to prove anyone with an old phone can build the future. What do you want to create today?”
+
+Part of OSAI operational system— the Φ-adaptive OS for everyone who only has a phone.
 
