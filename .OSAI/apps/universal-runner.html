@@ -32,27 +32,27 @@ function run(file) {
   nexusSpeak(`Recebi ${name}. Deixa comigo...`)
   
   if (name.endsWith('.exe') || name.endsWith('.dll')) {
-    nexusSpeak("Executável Windows detectado. Rodando via WebAssembly + Box86...")
+    OSAISpeak("Executável Windows detectado. Rodando via WebAssembly + Box86...")
     openApp('runtimes/wine-wasm.html?file=' + url)
   }
   else if (name.endsWith('.apk')) {
-    nexusSpeak("APK Android. Instalando em sandbox seguro...")
+    OSAISpeak("APK Android. Instalando em sandbox seguro...")
     openApp('runtimes/apk-runner.html?file=' + url)
   }
   else if (name.endsWith('.deb') || name.endsWith('.rpm')) {
-    nexusSpeak("Pacote Linux. Instalando no PRoot...")
+    OSAISpeak("Pacote Linux. Instalando no PRoot...")
     openApp('runtimes/deb-installer.html?file=' + url)
   }
   else if (name.endsWith('.py')) {
-    nexusSpeak("Script Python. Executando agora...")
+    OSAISpeak("Script Python. Executando agora...")
     openApp('runtimes/python.html?script=' + url)
   }
   else if (name.endsWith('.gb') || name.endsWith('.nds') || name.endsWith('.iso')) {
-    nexusSpeak("Jogo retro detectado. Abrindo emulador...")
+    OSAISpeak("Jogo retro detectado. Abrindo emulador...")
     openApp('runtimes/retroarch.html?rom=' + url)
   }
   else {
-    nexusSpeak("Não reconheço ainda, mas vou tentar abrir mesmo assim...")
+    OSAISpeak("Não reconheço ainda, mas vou tentar abrir mesmo assim...")
     window.open(url)
   }
 }
