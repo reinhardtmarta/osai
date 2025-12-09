@@ -29,19 +29,19 @@ function go(){
   nexusSpeak(`Abrindo ${url}... verificando segurança...`)
   setTimeout(()=>{
     if(url.includes('godot')||url.includes('python')||url.includes('wikipedia')){
-      nexusSpeak("Site oficial e seguro. Pode ir sem medo.")
+      OSAISpeak("Site oficial e seguro. Pode ir sem medo.")
     } else if(url.includes('tiktok')||url.includes('instagram')){
-      nexusSpeak("Esse site rastreia tudo. Quer que eu bloqueie cookies?")
+      OSAISpeak("Esse site rastreia tudo. Quer que eu bloqueie cookies?")
     } else {
-      nexusSpeak("Site desconhecido. Estou de olho.")
+      OSAISpeak("Site desconhecido. Estou de olho.")
     }
   },1500)
   
   document.getElementById('web').src = url
 }
 function home(){ document.getElementById('url').value='https://'; go() }
-function nexusSpeak(text){
-  parent.postMessage({type:'nexus',text},'*')
+function OSAISpeak(text){
+  parent.postMessage({type:'OSAI',text},'*')
 }
 go() // abre página em branco no início
 </script>
