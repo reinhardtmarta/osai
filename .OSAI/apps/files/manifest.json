@@ -1,0 +1,5 @@
+{
+    "name": "Files",
+    "entry": "./index.html",
+    "runner": "iframe"
+}
