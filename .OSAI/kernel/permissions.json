@@ -1,0 +1,7 @@
+{
+    "default": {
+        "fs.read": false,
+        "fs.write": false,
+        "network": false
+    }
+}
