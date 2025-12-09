@@ -1,8 +1,8 @@
 {
-  "name": "connectOS",
-  "short_name": "connectOS",
+  "name": "osai",
+  "short_name": "osai",
   "description": "Φ-adaptive OS in your browser • any device • no install",
-  "start_url": "/connectOS/",
+  "start_url": "/osai/",
   "display": "standalone",
   "background_color": "#000",
   "theme_color": "#0f0",
