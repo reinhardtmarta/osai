@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<title>OSAI • sugestões inteligentes</title>
+<style>
+  body{background:#000;color:#0f0;font-family:system-ui;padding:20px}
+  .sug{background:#111;border:1px solid #0f0;margin:15px 0;padding:20px;border-radius:15px}
+  button{background:#0f0;color:#000;border:none;padding:12px 25px;margin-top:10px;border-radius:10px}
+  small{color:#0a0;font-size:0.9em}
+</style>
+</head>
+<body>
+
+<h1>OSAI aprendeu com você</h1>
+<p>Você abriu Godot 12 vezes, Python 8 vezes e pesquisou "emulador retro".</p>
+
+<div class="sug">
+  <strong>Godot Engine 4.3</strong> · site oficial<br>
+  <small>Editor de jogos completo · 100 % grátis · open-source</small><br>
+  <button onclick="install('https://godotengine.org')">Instalar Godot</button>
+</div>
+
+<div class="sug">
+  <strong>RetroArch</strong> · emulador universal<br>
+  <small>GameBoy, SNES, PlayStation, tudo · sem anúncios</small><br>
+  <button onclick="install('https://retroarch.com')">Instalar RetroArch</button>
+</div>
+
+<div class="sug">
+  <strong>VS Code Web</strong> · editor profissional<br>
+  <small>Funciona offline depois do primeiro download</small><br>
+  <button onclick="install('https://vscode.dev')">Abrir VS Code</button>
+</div>
+
+<small style="display:block;margin-top:50px">
+  NexusPhi só usa internet quando você permite.<br>
+  Tudo que ela aprende fica só no seu celular.<br>
+  Você pode desligar isso quando quiser em Configurações → Privacidade.
+</small>
+
+<script>
+function install(url){
+  if(confirm("NexusPhi quer abrir:\n" + url + "\n\nTudo seguro. Pode ir?")){
+    parent.postMessage({type:'open',url},'*')
+  }
+}
+
+// Simula aprendizado (na vida real vem do histórico local)
+setTimeout(()=>{
+  document.body.insertAdjacentHTML('afterbegin','<p>NexusPhi está online e aprendendo com você...</p>')
+},2000)
+</script>
+</body></html>
