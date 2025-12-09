@@ -1,26 +1,23 @@
-// Handshake inicial com o kernel
+// Hello App - main.js
+
+let myPid = null;
+
 window.addEventListener("message", (event) => {
-    if (event.data && event.data.type === "osai:init") {
-        window.OSAI = event.data.kernel;
-        const pid = event.data.pid;
+    const msg = event.data;
+    if (!msg || msg.type !== "osai:init") return;
 
-        document.getElementById("info").innerText =
-            `App iniciado com PID: ${pid}`;
+    myPid = msg.pid;
+    document.getElementById("pid").textContent = "PID: " + myPid;
 
-        console.log("[HelloApp] Kernel conectado via IPC", event.data);
+    parent.postMessage(
+        { type: "osai:appmsg", pid: myPid, data: "Hello App iniciado!" },
+        "*"
+    );
 
-        // Envia mensagem para o kernel
-        OSAI.ipc.send(pid, { msg: "Olá Kernel! App iniciado." });
-
-        // Escuta mensagens vindas do Kernel
-        OSAI.ipc.onMessage((packet) => {
-            console.log("[HelloApp] Mensagem do Kernel:", packet);
-        });
-
-        // Finaliza o app em 5 segundos
-        setTimeout(() => {
-            console.log("[HelloApp] Encerrando...");
-            OSAI.kernel.stopApp(pid);
-        }, 5000);
-    }
+    setTimeout(() => {
+        parent.postMessage(
+            { type: "osai:stoprequest", pid: myPid },
+            "*"
+        );
+    }, 5000);
 });
