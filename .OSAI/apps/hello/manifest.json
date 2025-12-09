@@ -1,0 +1,13 @@
+{
+  "name": "HelloApp",
+  "id": "osai.hello",
+  "version": "1.0.0",
+  "description": "Aplicativo de teste do .OSAI Kernel",
+  "entry": "index.html",
+  "runner": "iframe",
+  "permissions": {
+    "logs": true,
+    "ipc": true,
+    "memory": true
+  }
+}
