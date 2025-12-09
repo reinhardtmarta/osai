@@ -1,0 +1,18 @@
+body {
+    background: #0d0d0d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+#splash {
+    color: #00eaff;
+    font-size: 4em;
+    font-family: sans-serif;
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
