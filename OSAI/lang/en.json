@@ -1,0 +1,8 @@
+{
+  "os_name": "osai",
+  "ai_name": "OSAI",
+  "welcome": "Hey, I’m OSAI. What do you want to create today?",
+  "placeholder": "Talk to me... create a game, an AI, a quantum sim...",
+  "installing": "Installing in your language...",
+  "offline": "100% offline · forever free"
+}
