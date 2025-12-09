@@ -1,4 +1,4 @@
-# NexusPhi Performance Manager
+# OSAI Performance Manager
 # Monitors and optimizes resource usage.
 
 class PerformanceManager:
