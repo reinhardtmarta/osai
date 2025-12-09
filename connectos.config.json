@@ -10,8 +10,7 @@
     "auth": { "secret": "osai-super-secret-key-2025" }
   },
   "intelligence": {
-    "memory": "./core/memory-module.js", 
-    // TODO: Crie esse arquivo pra Fase 2
+    "memory": "./core/memory-module.js",
     "predictions": true
   }
 }
