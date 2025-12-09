@@ -87,12 +87,12 @@ const OSAI = {
         console.log("[OSAI] Loading OSAI Core...");
 
         try {
-            await this.loadModule("/osAI/core/memory.py", "osaiMemory");
-            await this.loadModule("/osAI/core/adaptive_engine.py", "osaiAdaptive");
-            await this.loadModule("/osAI/core/performance.py", "osaiPerformance");
-            await this.loadModule("/osAI/core/permissions.py", "osaiPermissions");
-            await this.loadModule("/osAI/core/security_guard.py", "osaiSecurity");
-            await this.loadModule("/osAI/core/phi_attention.py", "osaiAttention");
+            await this.loadModule("/OSAI/core/memory.py", "osaiMemory");
+            await this.loadModule("/OSAI/core/adaptive_engine.py", "osaiAdaptive");
+            await this.loadModule("/OSAI/core/performance.py", "osaiPerformance");
+            await this.loadModule("/OSAI/core/permissions.py", "osaiPermissions");
+            await this.loadModule("/OSAI/core/security_guard.py", "osaiSecurity");
+            await this.loadModule("/OSAI/core/phi_attention.py", "osaiAttention");
 
             console.log("[OSAI] OSAI Core loaded.");
         } catch {
