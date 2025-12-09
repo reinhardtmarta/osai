@@ -3,3 +3,14 @@
   "language": "en-US",
   "OSAI_enabled": false
 }
+{
+  "apiManager": {
+    "url": "http://localhost:3000",
+    "enabled": true,
+    "auth": { "secret": "osai-super-secret-key-2025" }
+  },
+  "intelligence": {
+    "memory": "./core/memory-module.js",  // TODO: Crie esse arquivo pra Fase 2
+    "predictions": true
+  }
+}
